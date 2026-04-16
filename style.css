@@ -450,6 +450,62 @@ table tr:nth-child(even) td {
     margin: 8px 0 0 20px;
 }
 
+/* ---------- install button (PWA) ---------- */
+
+.install-wrap {
+    margin: 30px 0 10px;
+    text-align: center;
+}
+
+.install-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    background: var(--accent);
+    color: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: inherit;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.15s;
+}
+
+.install-btn:hover {
+    opacity: 0.9;
+}
+
+.install-btn:active {
+    transform: translateY(1px);
+}
+
+.install-btn[hidden] {
+    display: none;
+}
+
+.install-icon {
+    font-size: 18px;
+    line-height: 1;
+}
+
+.install-hint {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: var(--note-bg);
+    color: var(--note-text);
+    border-left: 4px solid var(--note-border);
+    font-size: 13px;
+    text-align: left;
+    display: inline-block;
+    max-width: 480px;
+}
+
+.install-hint[hidden] {
+    display: none;
+}
+
 /* ---------- footer ---------- */
 
 footer {
@@ -699,6 +755,28 @@ footer {
     border-top: 1px solid #808080;
     box-shadow: 0 -1px 0 #ffffff;
     color: #000000;
+}
+
+[data-theme="custom"] .install-btn {
+    background: #c0c0c0;
+    color: #000000;
+    border: 1px solid;
+    border-color: #ffffff #000000 #000000 #ffffff;
+    box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080;
+    border-radius: 0;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+[data-theme="custom"] .install-btn:hover {
+    opacity: 1;
+    background: #c0c0c0;
+}
+
+[data-theme="custom"] .install-btn:active {
+    border-color: #000000 #ffffff #ffffff #000000;
+    box-shadow: inset 1px 1px 0 #808080, inset -1px -1px 0 #dfdfdf;
+    transform: none;
 }
 
 @media (min-width: 900px) {

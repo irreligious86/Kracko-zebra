@@ -2,8 +2,20 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>«Кракозябра» — інструкція з експлуатації</title>
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2c3e50">
+    <meta name="description" content="Інструкція з підготовки та виконання польоту безпілотного комплексу «Кракозябра»">
+
+    <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+    <link rel="apple-touch-icon" href="icons/icon.svg">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Кракозябра">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -194,6 +206,16 @@
                     <li>Після завантаження та отримання позиціонування пульт можна <strong>вимкнути та прибрати на місце</strong>.</li>
                 </ol>
             </section>
+
+            <div class="install-wrap">
+                <button id="installBtn" class="install-btn" hidden type="button">
+                    <span class="install-icon" aria-hidden="true">⬇</span>
+                    <span>Встановити додаток</span>
+                </button>
+                <p id="installHint" class="install-hint" hidden>
+                    Для встановлення на iPhone: відкрийте меню «Поділитися» та оберіть «На екран «Додому»».
+                </p>
+            </div>
 
             <footer>
                 <p>«Кракозябра» — інструкція з експлуатації</p>
