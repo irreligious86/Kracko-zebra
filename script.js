@@ -1,3 +1,30 @@
+/* ---------- PWA: зловити beforeinstallprompt якомога раніше ---------- */
+let deferredPrompt = null;
+let pwaReady = false;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    pwaReady = true;
+    const btn = document.getElementById('installBtn');
+    const hint = document.getElementById('installHint');
+    const standalone =
+        window.matchMedia('(display-mode: standalone)').matches ||
+        window.navigator.standalone === true;
+    if (btn && !standalone) {
+        btn.hidden = false;
+        if (hint) hint.hidden = true;
+    }
+});
+
+window.addEventListener('appinstalled', () => {
+    deferredPrompt = null;
+    const btn = document.getElementById('installBtn');
+    const hint = document.getElementById('installHint');
+    if (btn) btn.hidden = true;
+    if (hint) hint.hidden = true;
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     /* ---------- навігація по розділах ---------- */
     const links = document.querySelectorAll('.nav-link');
@@ -68,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
     applyTheme(savedTheme);
 
-    /* ---------- PWA: service worker ---------- */
+    /* ---------- PWA: реєстрація service worker ---------- */
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('sw.js').catch(err => {
@@ -80,7 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ---------- PWA: кнопка встановлення ---------- */
     const installBtn = document.getElementById('installBtn');
     const installHint = document.getElementById('installHint');
-    let deferredPrompt = null;
 
     const isStandalone =
         window.matchMedia('(display-mode: standalone)').matches ||
@@ -88,14 +114,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
 
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        if (!isStandalone) {
-            installBtn.hidden = false;
-            installHint.hidden = true;
-        }
-    });
+    if (pwaReady && !isStandalone) {
+        installBtn.hidden = false;
+    }
 
     installBtn.addEventListener('click', async () => {
         if (!deferredPrompt) return;
@@ -108,12 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
             installBtn.hidden = true;
             installBtn.disabled = false;
         }
-    });
-
-    window.addEventListener('appinstalled', () => {
-        deferredPrompt = null;
-        installBtn.hidden = true;
-        installHint.hidden = true;
     });
 
     if (isIOS && !isStandalone) {
