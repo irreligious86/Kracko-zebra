@@ -8,11 +8,21 @@
 </head>
 <body>
     <header>
-        <h1>«Кракозябра»</h1>
-        <p class="subtitle">Інструкція з підготовки та виконання польоту</p>
+        <button class="menu-toggle" id="menuToggle" aria-label="Меню">☰</button>
+        <div class="header-left">
+            <h1>«Кракозябра»</h1>
+            <p class="subtitle">Інструкція з підготовки та виконання польоту</p>
+        </div>
+        <div class="theme-switcher" id="themeSwitcher">
+            <button class="theme-btn" data-theme="light">Світла</button>
+            <button class="theme-btn" data-theme="dark">Темна</button>
+            <button class="theme-btn" data-theme="matrix">Matrix</button>
+            <button class="theme-btn" data-theme="custom">Win95</button>
+        </div>
     </header>
 
     <div class="layout">
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
         <nav id="sidebar">
             <ul>
                 <li><a href="#ground" class="nav-link active">1. Підготовка наземного обладнання</a></li>
